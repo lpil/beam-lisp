@@ -1,7 +1,7 @@
 BEAM Lisp
 ========
 
-Learning to languages on the BEAM.
+Learning to make languages on the BEAM.
 
 ```sh
 # Build the project

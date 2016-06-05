@@ -2,7 +2,7 @@
 -include_lib("eunit/include/eunit.hrl").
 
 -define(assertTokens(Code, Tokens),
-        ?assertMatch(Tokens, lisp_lexer:'tokenize!'(Code))).
+        ?assertEqual(Tokens, lisp_lexer:'string!'(Code))).
 
 int_test() ->
   ?assertTokens("1",    [{int, "1"}]),
@@ -29,12 +29,12 @@ atom_test() ->
 
 expression_test() ->
   ?assertTokens("(add 1 (mult 2 3))",
-                [{open_paren,  "("},
-                 {atom,        "add"},
-                 {int,         "1"},
-                 {open_paren,  "("},
-                 {atom,        "mult"},
-                 {int,         "2"},
-                 {int,         "3"},
-                 {close_paren, ")"},
-                 {close_paren, ")"}]).
+                [{'(',  "("},
+                 {atom, "add"},
+                 {int,  "1"},
+                 {'(',  "("},
+                 {atom, "mult"},
+                 {int,  "2"},
+                 {int,  "3"},
+                 {')',  ")"},
+                 {')',  ")"}]).

@@ -5,14 +5,13 @@ Int    = [+-]?[0-9]+
 Float  = [+-]?[0-9]+\.[0-9]+
 String = "([^\\""]|\\.)*"
 Atom   = [a-zA-Z_^!+=*\-\?]+
-OP     = [\(]
-CP     = [\)]
+
 
 Rules.
 
 {WS}     : skip_token.
-[(]      : {token, {open_paren, "("}}.
-[)]      : {token, {close_paren, ")"}}.
+[(]      : {token, {'(', TokenChars}}.
+[)]      : {token, {')', TokenChars}}.
 {Int}    : {token, {int, TokenChars}}.
 {Float}  : {token, {float, TokenChars}}.
 {String} : {token, {string, strValue(TokenChars)}}.
@@ -21,9 +20,9 @@ Rules.
 
 Erlang code.
 
--export(['tokenize!'/1]).
+-export(['string!'/1]).
 
-'tokenize!'(Code) ->
+'string!'(Code) ->
  {ok, Tokens, _} = string(Code),
  Tokens.
 
